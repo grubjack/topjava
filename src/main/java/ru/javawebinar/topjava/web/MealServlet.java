@@ -6,7 +6,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
-import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import javax.servlet.ServletConfig;
@@ -62,22 +61,24 @@ public class MealServlet extends HttpServlet {
             String fromTime = request.getParameter("fromTime");
             String toTime = request.getParameter("toTime");
 
-            List<UserMeal> meals = (List<UserMeal>) repository.getAll();
+            List<UserMeal> meals;
 
-            if (!fromDate.equals("") && !toDate.equals("") && !fromTime.equals("") && !toTime.equals("")) {
-                LOG.info("getByDateTimeFilter: from: " + fromDate + fromTime + ", to: " + toDate + toTime);
-                meals = repository.getByDateTime(LocalDateTime.parse(fromDate + " " + fromTime, TimeUtil.DATE_TME_FORMATTER), LocalDateTime.parse(toDate + " " + toTime, TimeUtil.DATE_TME_FORMATTER));
-            } else if (!fromDate.equals("") && !toDate.equals("")) {
-                LOG.info("getByDateTimeFilter: from: " + fromDate + ", to: " + toDate);
-                meals = repository.getByDate(LocalDate.parse(fromDate), LocalDate.parse(toDate));
-            } else if (!fromTime.equals("") && !toTime.equals("")) {
-                LOG.info("getByDateTimeFilter: from: " + fromTime + ", to: " + toTime);
-                meals = repository.getByTime(LocalTime.parse(fromTime, TimeUtil.TIME_FORMATTER), LocalTime.parse(toTime, TimeUtil.TIME_FORMATTER));
-            }
+            LocalTime fromLocalTime = fromTime.equals("") ? LocalTime.MIN : LocalTime.parse(fromTime);
+            LocalTime toLocalTime = toTime.equals("") ? LocalTime.MAX : LocalTime.parse(toTime);
 
+            LocalDateTime fromLocalDateTime = fromDate.equals("") ? LocalDateTime.MIN : LocalDate.parse(fromDate).atTime(fromLocalTime);
+            LocalDateTime toLocalDateTime = toDate.equals("") ? LocalDateTime.MAX : LocalDate.parse(toDate).atTime(toLocalTime);
+
+            if (fromDate.equals("") && toDate.equals(""))
+                meals = repository.getByTime(fromLocalTime, toLocalTime);
+            else
+                meals = repository.getByDateTime(fromLocalDateTime, toLocalDateTime);
+
+            LOG.info("getByDateTimeFilter: from: " + fromLocalDateTime + ", to: " + toLocalDateTime);
             request.setAttribute("mealList", UserMealsUtil.getWithExceeded(meals, UserMealsUtil.DEFAULT_CALORIES_PER_DAY));
             request.getRequestDispatcher("mealList.jsp").forward(request, response);
         }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

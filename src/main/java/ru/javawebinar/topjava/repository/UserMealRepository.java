@@ -3,7 +3,6 @@ package ru.javawebinar.topjava.repository;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.model.UserMeal;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
@@ -21,8 +20,6 @@ public interface UserMealRepository {
     UserMeal get(int id);
 
     Collection<UserMeal> getAll();
-
-    List<UserMeal> getByDate(LocalDate from, LocalDate to);
 
     List<UserMeal> getByTime(LocalTime from, LocalTime to);
 
