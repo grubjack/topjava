@@ -8,6 +8,9 @@ import ru.javawebinar.topjava.repository.UserMealRepository;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -19,6 +22,21 @@ public class UserMealServiceImpl implements UserMealService {
 
     @Autowired
     private UserMealRepository repository;
+
+    @Override
+    public List<UserMeal> getByDate(LocalDate from, LocalDate to) {
+        return repository.getByDate(from, to);
+    }
+
+    @Override
+    public List<UserMeal> getByTime(LocalTime from, LocalTime to) {
+        return repository.getByTime(from, to);
+    }
+
+    @Override
+    public List<UserMeal> getByDateTime(LocalDateTime from, LocalDateTime to) {
+        return repository.getByDateTime(from, to);
+    }
 
     @Override
     public UserMeal save(UserMeal meal) {

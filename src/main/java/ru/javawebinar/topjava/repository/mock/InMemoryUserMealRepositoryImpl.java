@@ -6,10 +6,15 @@ import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -55,6 +60,24 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     public Collection<UserMeal> getAll() {
         LOG.info("getAll");
         return repository.values().stream().sorted(Comparator.comparing(UserMeal::getDateTime).reversed()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserMeal> getByDate(LocalDate from, LocalDate to) {
+        LOG.info("getByDate: from: " + from + ", to: " + to);
+        return getAll().stream().filter(userMeal -> TimeUtil.isBetween(userMeal.getDateTime().toLocalDate(), from, to)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserMeal> getByTime(LocalTime from, LocalTime to) {
+        LOG.info("getByTime: from: " + from + ", to: " + to);
+        return getAll().stream().filter(userMeal -> TimeUtil.isBetween(userMeal.getDateTime().toLocalTime(), from, to)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserMeal> getByDateTime(LocalDateTime from, LocalDateTime to) {
+        LOG.info("getByDateTime: from: " + from + ", to: " + to);
+        return getAll().stream().filter(userMeal -> TimeUtil.isBetween(userMeal.getDateTime(), from, to)).collect(Collectors.toList());
     }
 
     @Override
