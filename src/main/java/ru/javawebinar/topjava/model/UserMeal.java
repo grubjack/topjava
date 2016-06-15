@@ -6,18 +6,24 @@ import java.time.LocalDateTime;
  * GKislin
  * 11.01.2015.
  */
-public class UserMeal {
+public class UserMeal extends BaseEntity {
     private final LocalDateTime dateTime;
     private final String description;
     private final int calories;
-    private Integer id;
+    private final User user;
 
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
     }
 
     public UserMeal(Integer id, LocalDateTime dateTime, String description, int calories) {
-        this.id = id;
+        this(id, null, dateTime, description, calories);
+    }
+
+
+    public UserMeal(Integer id, User user, LocalDateTime dateTime, String description, int calories) {
+        super(id);
+        this.user = user;
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
@@ -35,25 +41,17 @@ public class UserMeal {
         return calories;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public boolean isNew() {
-        return id == null;
+    public User getUser() {
+        return user;
     }
 
     @Override
     public String toString() {
         return "UserMeal{" +
-                "id=" + id +
-                ", dateTime=" + dateTime +
+                "dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +
+                ", user=" + user +
                 '}';
     }
 }
