@@ -15,11 +15,11 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
-            <%--<th>Roles</th>--%>
-            <%--<th>Active</th>--%>
-            <%--<th>Registered</th>--%>
-            <%--<th></th>--%>
-            <%--<th></th>--%>
+            <th>Roles</th>
+            <th>Active</th>
+            <th>Registered</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <c:forEach items="${user}" var="users">
@@ -27,11 +27,11 @@
             <tr>
                 <td>${user.name}</td>
                 <td>${user.email}</td>
-                    <%--<td>${user.roles}</td>--%>
-                    <%--<td>${user.enabled}</td>--%>
-                    <%--<td>${user.registered}</td>--%>
-                    <%--<td><a href="users?action=update&id=${user.id}">Update</a></td>--%>
-                    <%--<td><a href="users?action=delete&id=${user.id}">Delete</a></td>--%>
+                <td>${user.roles}</td>
+                <td>${user.enabled}</td>
+                <td>${user.registered}</td>
+                <td><a href="users?action=update&id=${user.id}">Update</a></td>
+                <td><a href="users?action=delete&id=${user.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

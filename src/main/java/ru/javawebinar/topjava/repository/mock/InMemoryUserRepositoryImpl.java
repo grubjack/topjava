@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.repository.mock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
@@ -23,12 +24,12 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     private Map<Integer, User> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
 
-//    {
-//        save(new User(1, "userName1", "email1", "password1", Role.ROLE_ADMIN));
-//        save(new User(2, "userName2", "email2", "password2", Role.ROLE_USER));
-//        save(new User(3, "userName3", "email3", "password3", Role.ROLE_ADMIN, Role.ROLE_USER));
-//        save(new User(4, "userName4", "email4", "password4", Role.ROLE_USER));
-//    }
+    {
+        save(new User(1, "userName1", "email1", "password1", Role.ROLE_ADMIN));
+        save(new User(2, "userName2", "email2", "password2", Role.ROLE_USER));
+        save(new User(3, "userName3", "email3", "password3", Role.ROLE_ADMIN, Role.ROLE_USER));
+        save(new User(4, "userName4", "email4", "password4", Role.ROLE_USER));
+    }
 
     @Override
     public boolean delete(int id) {
