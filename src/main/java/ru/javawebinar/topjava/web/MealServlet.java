@@ -40,7 +40,7 @@ public class MealServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        request.setAttribute("currentId", LoggedUser.getId());
+        request.setAttribute("userId", LoggedUser.getId());
 
         String id = request.getParameter("id");
 
@@ -48,6 +48,7 @@ public class MealServlet extends HttpServlet {
 
 
             UserMeal userMeal = new UserMeal(id.isEmpty() ? null : Integer.valueOf(id),
+                    LoggedUser.getId(),
                     LocalDateTime.parse(request.getParameter("dateTime")),
                     request.getParameter("description"),
                     Integer.valueOf(request.getParameter("calories")));
@@ -84,7 +85,7 @@ public class MealServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        request.setAttribute("currentId", LoggedUser.getId());
+        request.setAttribute("userId", LoggedUser.getId());
 
         if (action == null) {
             LOG.info("getAll");

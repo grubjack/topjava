@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-LoggedUser: <b>id=${currentId}</b>
+LoggedUser: <b>id=${userId}</b>
 <br>
 <a href="meals?action=logout">Logout</a>
 <section>

@@ -48,7 +48,7 @@ public class UserMealServiceImpl implements UserMealService {
     @Override
     public UserMeal save(int userId, UserMeal meal) {
         LOG.info("save");
-        return ExceptionUtil.checkNotFoundWithId(repository.save(userId, meal), userId);
+        return ExceptionUtil.checkNotFoundWithId(repository.save(userId, meal), meal.getId());
     }
 
     @Override

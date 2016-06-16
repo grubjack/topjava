@@ -29,12 +29,14 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        UserMealsUtil.MEAL_LIST.forEach(userMeal -> save(userMeal.getUserId(), userMeal));
+//        UserMealsUtil.MEAL_LIST.forEach(userMeal -> save(userMeal.getUserId(), userMeal));
+        for (UserMeal meal : UserMealsUtil.MEAL_LIST)
+            save(meal.getUserId(), meal);
     }
 
     @Override
     public UserMeal save(int userId, UserMeal userMeal) {
-        LOG.info("save " + userMeal);
+        LOG.info("save " + userMeal + " with user id = " + userMeal.getUserId() + " updated by user with id " + userId);
         if (userMeal.isNew()) {
             userMeal.setId(counter.incrementAndGet());
         } else if (userMeal.getUserId() != userId)
