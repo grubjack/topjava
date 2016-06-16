@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.repository;
 
-import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.model.UserMeal;
 
 import java.time.LocalDateTime;
@@ -13,17 +12,15 @@ import java.util.List;
  * 06.03.2015.
  */
 public interface UserMealRepository {
-    UserMeal save(UserMeal userMeal);
+    UserMeal save(int userId, UserMeal userMeal);
 
-    void delete(int id);
+    boolean delete(int userId, int id);
 
-    UserMeal get(int id);
+    UserMeal get(int userId, int id);
 
-    Collection<UserMeal> getAll();
+    Collection<UserMeal> getAll(int userId);
 
-    List<UserMeal> getByTime(LocalTime from, LocalTime to);
+    List<UserMeal> getByTime(int userId, LocalTime from, LocalTime to);
 
-    List<UserMeal> getByDateTime(LocalDateTime from, LocalDateTime to);
-
-    User getUser(int id);
+    List<UserMeal> getByDateTime(int userId, LocalDateTime from, LocalDateTime to);
 }

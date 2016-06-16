@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.UserMeal;
+import ru.javawebinar.topjava.model.to.UserMealWithExceed;
 import ru.javawebinar.topjava.service.UserMealService;
-import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -23,36 +25,33 @@ public class UserMealRestController {
     @Autowired
     private UserMealService service;
 
-    public List<UserMeal> getAll() {
+    public List<UserMealWithExceed> getAll() {
         LOG.info("getAll");
-        return service.getAll();
+        return service.getAll(LoggedUser.getId());
     }
 
     public UserMeal get(int id) {
-        if (LoggedUser.id() != service.get(id).getUser().getId())
-            throw new NotFoundException("access denied");
-
         LOG.info("get " + id);
-        return service.get(id);
-    }
-
-    public UserMeal create(UserMeal meal) {
-        LOG.info("create " + meal);
-        meal.setId(null);
-        return service.save(meal);
+        return service.get(LoggedUser.getId(), id);
     }
 
     public void delete(int id) {
         LOG.info("delete " + id);
-        service.delete(id);
+        service.delete(LoggedUser.getId(), id);
     }
 
-    public void update(UserMeal meal, int id) {
+    public void update(UserMeal meal) {
         LOG.info("update " + meal);
-        if (LoggedUser.id() != meal.getUser().getId())
-            throw new NotFoundException("access denied");
+        service.save(LoggedUser.getId(), meal);
+    }
 
-        meal.setId(id);
-        service.update(meal);
+    public List<UserMealWithExceed> getByDateTime(LocalDateTime start, LocalDateTime end) {
+        LOG.info("getByDateTime");
+        return service.getByDateTime(LoggedUser.getId(), start, end);
+    }
+
+    public List<UserMealWithExceed> getByTime(LocalTime start, LocalTime end) {
+        LOG.info("getByTime");
+        return service.getByTime(LoggedUser.getId(), start, end);
     }
 }

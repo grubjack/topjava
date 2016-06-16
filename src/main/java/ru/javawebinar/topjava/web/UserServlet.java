@@ -1,11 +1,8 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.LoggedUser;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,20 +17,17 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 public class UserServlet extends HttpServlet {
     private static final Logger LOG = getLogger(UserServlet.class);
-    private UserRepository repository;
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml")) {
-            repository = appCtx.getBean(UserRepository.class);
-        }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOG.debug("redirect to userList");
+        response.sendRedirect("users");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LOG.info("getAll");
-        request.setAttribute("users", repository.getAll());
-        request.getRequestDispatcher("userList.jsp").forward(request, response);
-//        response.sendRedirect("userList.jsp");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("userId") != null)
+            LoggedUser.setId(Integer.parseInt(request.getParameter("userId")));
+        response.sendRedirect("meals");
     }
 }

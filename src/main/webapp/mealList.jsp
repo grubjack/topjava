@@ -16,6 +16,9 @@
     </style>
 </head>
 <body>
+LoggedUser: <b>id=${currentId}</b>
+<br>
+<a href="meals?action=logout">Logout</a>
 <section>
     <h2><a href="index.html">Home</a></h2>
     <h3>Meal list</h3>

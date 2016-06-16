@@ -1,10 +1,14 @@
 package ru.javawebinar.topjava.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.UserMeal;
+import ru.javawebinar.topjava.model.to.UserMealWithExceed;
 import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.util.UserMealsUtil;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
@@ -18,47 +22,44 @@ import java.util.List;
  */
 @Service
 public class UserMealServiceImpl implements UserMealService {
+    private static final Logger LOG = LoggerFactory.getLogger(UserMealServiceImpl.class);
 
     @Autowired
     private UserMealRepository repository;
 
     @Override
-    public List<UserMeal> getByTime(LocalTime from, LocalTime to) {
-        return repository.getByTime(from, to);
+    public List<UserMealWithExceed> getByTime(int userId, LocalTime from, LocalTime to) {
+        LOG.info("getByTime");
+        return UserMealsUtil.getFilteredWithExceeded(repository.getByTime(userId, from, to), from, to, LoggedUser.getCaloriesPerDay());
     }
 
     @Override
-    public List<UserMeal> getByDateTime(LocalDateTime from, LocalDateTime to) {
-        return repository.getByDateTime(from, to);
+    public List<UserMealWithExceed> getByDateTime(int userId, LocalDateTime from, LocalDateTime to) {
+        LOG.info("getByDateTime");
+        return UserMealsUtil.getFilteredWithExceeded(repository.getByDateTime(userId, from, to), from.toLocalTime(), to.toLocalTime(), LoggedUser.getCaloriesPerDay());
     }
 
     @Override
-    public UserMeal save(UserMeal meal) {
-        return repository.save(meal);
+    public List<UserMealWithExceed> getAll(int userId) {
+        LOG.info("getAll");
+        return UserMealsUtil.getFilteredWithExceeded(repository.getAll(userId), LocalTime.MIN, LocalTime.MAX, LoggedUser.getCaloriesPerDay());
     }
 
     @Override
-    public void delete(int id) throws NotFoundException {
-        repository.delete(id);
+    public UserMeal save(int userId, UserMeal meal) {
+        LOG.info("save");
+        return ExceptionUtil.checkNotFoundWithId(repository.save(userId, meal), userId);
     }
 
     @Override
-    public UserMeal get(int id) throws NotFoundException {
-        return ExceptionUtil.checkNotFoundWithId(repository.get(id), id);
+    public void delete(int userId, int id) throws NotFoundException {
+        LOG.info("delete");
+        ExceptionUtil.checkNotFoundWithId(repository.delete(userId, id), id);
     }
 
     @Override
-    public List<UserMeal> getAll() {
-        return (List<UserMeal>) repository.getAll();
-    }
-
-    @Override
-    public User getUser(int id) throws NotFoundException {
-        return ExceptionUtil.checkNotFoundWithId(repository.getUser(id), id);
-    }
-
-    @Override
-    public void update(UserMeal meal) {
-        repository.save(meal);
+    public UserMeal get(int userId, int id) throws NotFoundException {
+        LOG.info("get");
+        return ExceptionUtil.checkNotFoundWithId(repository.get(userId, id), id);
     }
 }
