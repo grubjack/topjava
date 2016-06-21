@@ -10,7 +10,6 @@ public class UserMeal extends BaseEntity {
     private final LocalDateTime dateTime;
     private final String description;
     private final int calories;
-    private Integer id;
 
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
