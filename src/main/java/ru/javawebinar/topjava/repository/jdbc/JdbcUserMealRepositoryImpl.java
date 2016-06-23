@@ -52,32 +52,32 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
             Number newKey = insertMeal.executeAndReturnKey(map);
             meal.setId(newKey.intValue());
         } else {
-            String sql = "UPDATE meals SET dateTime=:dateTime, description=:description, calories=:calories WHERE id=:id";
-            if (get(meal.getId(), userId) == null)
-                sql = "INSERT INTO meals (id,dateTime,description,calories) VALUES (:id,:name,:email,:password,:registered,:enabled,:caloriesPerDay)";
-            namedParameterJdbcTemplate.update(sql, map);
+//            String sql = "UPDATE meals SET dateTime=:dateTime, description=:description, calories=:calories WHERE id=:id";
+//            if (get(meal.getId(), userId) == null)
+//                sql = "INSERT INTO meals (id,dateTime,description,calories) VALUES (:id,:name,:email,:password,:registered,:enabled,:caloriesPerDay)";
+            namedParameterJdbcTemplate.update("UPDATE meals SET dateTime=:dateTime, description=:description, calories=:calories WHERE id=:id", map);
         }
         return meal;
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return jdbcTemplate.update("DELETE FROM meals WHERE id=?", id) != 0;
+        return jdbcTemplate.update("DELETE FROM meals WHERE id=? AND user_id=?", id, userId) != 0;
     }
 
     @Override
     public UserMeal get(int id, int userId) {
-        return DataAccessUtils.singleResult(jdbcTemplate.query("SELECT * FROM meals WHERE id=?", ROW_MAPPER, id));
+        return DataAccessUtils.singleResult(jdbcTemplate.query("SELECT * FROM meals WHERE id=? AND user_id=?", ROW_MAPPER, id, userId));
     }
 
     @Override
     public List<UserMeal> getAll(int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals ORDER BY dateTime DESC", ROW_MAPPER);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY dateTime DESC", ROW_MAPPER, userId);
     }
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals WHERE dateTime BETWEEN ? AND ?", ROW_MAPPER, startDate, endDate);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? AND dateTime BETWEEN ? AND ?", ROW_MAPPER, userId, startDate, endDate);
     }
 
 
