@@ -46,8 +46,10 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
                 .addValue("id", meal.getId())
                 .addValue("dateTime", meal.getDateTime())
                 .addValue("description", meal.getDescription())
-                .addValue("calories", meal.getCalories());
+                .addValue("calories", meal.getCalories())
+                .addValue("userId", userId);
 
+        int updatedRows = 0;
         if (meal.isNew()) {
             Number newKey = insertMeal.executeAndReturnKey(map);
             meal.setId(newKey.intValue());
@@ -55,9 +57,9 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 //            String sql = "UPDATE meals SET dateTime=:dateTime, description=:description, calories=:calories WHERE id=:id";
 //            if (get(meal.getId(), userId) == null)
 //                sql = "INSERT INTO meals (id,dateTime,description,calories) VALUES (:id,:name,:email,:password,:registered,:enabled,:caloriesPerDay)";
-            namedParameterJdbcTemplate.update("UPDATE meals SET dateTime=:dateTime, description=:description, calories=:calories WHERE id=:id", map);
+            updatedRows = namedParameterJdbcTemplate.update("UPDATE meals SET dateTime=:dateTime, description=:description, calories=:calories WHERE id=:id AND user_id=:userId", map);
         }
-        return meal;
+        return updatedRows == 0 ? null : meal;
     }
 
     @Override
