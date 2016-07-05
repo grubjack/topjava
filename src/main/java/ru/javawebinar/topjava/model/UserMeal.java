@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
+import ru.javawebinar.topjava.repository.jdbc.LocalDateTimePersistenceConverter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,6 +36,7 @@ public class UserMeal extends BaseEntity {
 
     @Column(name = "date_time", nullable = false)
     @NotNull
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
