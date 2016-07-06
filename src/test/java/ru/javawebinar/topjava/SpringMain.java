@@ -10,7 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringMain {
     public static void main(String[] args) {
         // java 7 Automatic resource management
-        System.setProperty("spring.profiles.active", Profiles.ACTIVE_DB + "," + Profiles.ACTIVE_REP);
+        System.setProperty("spring.profiles.active", Profiles.ACTIVE_DB + "," + Profiles.DATAJPA);
         try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml")) {
             for (String bean : appCtx.getBeanDefinitionNames()) {
                 System.out.println(bean);

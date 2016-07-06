@@ -27,7 +27,6 @@ import java.util.List;
 public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     private static final LocalDateTimePersistenceConverter converter = new LocalDateTimePersistenceConverter();
-
     private static final RowMapper<UserMeal> ROW_MAPPER = new RowMapper<UserMeal>() {
         @Override
         public UserMeal mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -42,7 +41,6 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
             return userMeal;
         }
     };
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

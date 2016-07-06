@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.repository.datajpa;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,20 +16,20 @@ import java.util.List;
  */
 public interface ProxyUserMealRepository extends JpaRepository<UserMeal, Integer> {
 
+    @Override
     @Transactional
     @Modifying
-    @Query("DELETE FROM UserMeal m WHERE m.id=:id AND m.user.id=:userId")
-    int delete(@Param("id") int id, @Param("userId") int userId);
+    void delete(Integer id);
 
     @Override
     @Transactional
     UserMeal save(UserMeal user);
 
-    @Query("SELECT m FROM UserMeal m WHERE m.id=:id AND m.user.id=:userId")
-    UserMeal findOne(@Param("id") Integer id, @Param("userId") int userId);
+    @Override
+    UserMeal findOne(Integer id);
 
-    @Query("SELECT m FROM UserMeal m WHERE m.user.id=:userId ORDER BY m.dateTime DESC")
-    List<UserMeal> findAll(@Param("userId") int userId);
+    @Query("SELECT m FROM UserMeal m WHERE m.user.id=:userId")
+    List<UserMeal> findAll(@Param("userId") int userId, Sort sort);
 
     @Query("SELECT m FROM UserMeal m WHERE m.user.id=:userId AND m.dateTime BETWEEN :startDate AND :endDate ORDER BY m.dateTime DESC")
     List<UserMeal> getBetween(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate, @Param("userId") int userId);
