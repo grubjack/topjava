@@ -25,7 +25,7 @@ public interface ProxyUserMealRepository extends JpaRepository<UserMeal, Integer
     @Transactional
     UserMeal save(UserMeal user);
 
-    @Override
+    @Query("SELECT m FROM UserMeal m LEFT JOIN FETCH m.user WHERE m.id=?1")
     UserMeal findOne(Integer id);
 
     @Query("SELECT m FROM UserMeal m WHERE m.user.id=:userId")
