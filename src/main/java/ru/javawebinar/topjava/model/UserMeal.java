@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
  * GKislin
  * 11.01.2015.
  */
+@SuppressWarnings("JpaQlInspection")
 @NamedQueries({
-        @NamedQuery(name = UserMeal.GET, query = "SELECT m FROM UserMeal m WHERE m.id=:id AND m.user.id=:userId"),
+        @NamedQuery(name = UserMeal.GET, query = "SELECT  m FROM UserMeal m WHERE m.id=:id AND m.user.id=:userId"),
         @NamedQuery(name = UserMeal.ALL_SORTED, query = "SELECT m FROM UserMeal m WHERE m.user.id=:userId ORDER BY m.dateTime DESC"),
         @NamedQuery(name = UserMeal.DELETE, query = "DELETE FROM UserMeal m WHERE m.id=:id AND m.user.id=:userId"),
         @NamedQuery(name = UserMeal.GET_BETWEEN, query = "SELECT m FROM UserMeal m " +
