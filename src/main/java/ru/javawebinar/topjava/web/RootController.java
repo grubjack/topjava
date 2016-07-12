@@ -98,11 +98,15 @@ public class RootController {
 
 
     @RequestMapping(value = "/meals", method = RequestMethod.POST)
-    public String filterMeal(@RequestParam(value = "startDate") LocalDate startDate,
-                             @RequestParam(value = "endDate") LocalDate endDate,
-                             @RequestParam(value = "startTime") LocalTime startTime,
-                             @RequestParam(value = "endTime") LocalTime endTime,
+    public String filterMeal(@RequestParam(value = "startDate") String startDateString,
+                             @RequestParam(value = "endDate") String endDateString,
+                             @RequestParam(value = "startTime") String startTimeString,
+                             @RequestParam(value = "endTime") String endTimeString,
                              Model model) {
+        LocalDate startDate = TimeUtil.parseLocalDate(startDateString);
+        LocalDate endDate = TimeUtil.parseLocalDate(endDateString);
+        LocalTime startTime = TimeUtil.parseLocalTime(startTimeString);
+        LocalTime endTime = TimeUtil.parseLocalTime(endTimeString);
         model.addAttribute("mealList", UserMealsUtil.getFilteredWithExceeded(serviceUserMeal.getBetweenDates(
                 startDate != null ? startDate : TimeUtil.MIN_DATE, endDate != null ? endDate : TimeUtil.MAX_DATE, AuthorizedUser.id),
                 startTime != null ? startTime : LocalTime.MIN, endTime != null ? endTime : LocalTime.MAX, AuthorizedUser.getCaloriesPerDay()));
