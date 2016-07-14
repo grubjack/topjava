@@ -26,6 +26,7 @@ public interface ProxyUserRepository extends JpaRepository<User, Integer> {
     User save(User user);
 
     @Override
+    @Query("SELECT u from User u JOIN fetch u.roles where u.id=?1")
     User findOne(Integer id);
 
     @Override
@@ -34,6 +35,6 @@ public interface ProxyUserRepository extends JpaRepository<User, Integer> {
 
     User getByEmail(String email);
 
-    @Query("SELECT u FROM User u LEFT JOIN FETCH u.meals WHERE u.id = ?1")
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.meals JOIN FETCH u.roles WHERE u.id = ?1")
     User getWithMeals(Integer id);
 }
