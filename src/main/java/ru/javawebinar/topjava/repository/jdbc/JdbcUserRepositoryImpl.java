@@ -41,6 +41,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     private SimpleJdbcInsert insertUser;
 
+    @Autowired
     private DataSourceTransactionManager transactionManager;
 
     @Autowired
@@ -48,7 +49,6 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         this.insertUser = new SimpleJdbcInsert(dataSource)
                 .withTableName("USERS")
                 .usingGeneratedKeyColumns("id");
-        this.transactionManager = new DataSourceTransactionManager(dataSource);
     }
 
     @Override
