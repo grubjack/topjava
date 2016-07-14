@@ -1,7 +1,6 @@
 package ru.javawebinar.topjava.repository.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -94,11 +93,9 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             }
 
             transactionManager.commit(status);
-        } catch (DataAccessException e1) {
+        } catch (Exception e) {
             transactionManager.rollback(status);
-            throw e1;
-        } catch (Exception e2) {
-            transactionManager.rollback(status);
+            throw e;
         }
         return user;
     }
@@ -121,6 +118,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             transactionManager.commit(status);
         } catch (Exception e) {
             transactionManager.rollback(status);
+            throw e;
         }
         return user;
     }
@@ -135,6 +133,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             transactionManager.commit(status);
         } catch (Exception e) {
             transactionManager.rollback(status);
+            throw e;
         }
         return user;
     }
@@ -151,6 +150,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             transactionManager.commit(status);
         } catch (Exception e) {
             transactionManager.rollback(status);
+            throw e;
         }
         return users;
     }
