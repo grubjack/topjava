@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
@@ -141,7 +140,6 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    @Transactional
     public List<User> getAll() {
         List<User> users = Collections.EMPTY_LIST;
         TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
