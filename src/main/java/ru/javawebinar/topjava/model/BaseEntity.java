@@ -4,16 +4,13 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import javax.persistence.*;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
-
 /**
  * User: gkislin
  * Date: 22.08.2014
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
+//@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
 public class BaseEntity {
     public static final int START_SEQ = 100000;
 
