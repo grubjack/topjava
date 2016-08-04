@@ -18,10 +18,30 @@ function makeEditable() {
         return false;
     });
 
+    $('.checkbox').click(function () {
+        $.ajax({
+            type: "POST",
+            url: ajaxUrl,
+            data: {
+                "id": $(this).closest('tr').attr("id"),
+                "name": $(this).closest('tr').find("td:nth-child(1)").text(),
+                "email": $(this).closest('tr').find("td:nth-child(2)").text(),
+                "password": "default",
+                "enabled": $(this).prop('checked')
+            },
+            success: function () {
+                $('#editRow').modal('hide');
+                updateTable();
+                successNoty('Saved');
+            }
+        });
+    });
+
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(event, jqXHR, options, jsExc);
     });
 }
+
 
 function filter() {
     var form = $('#filterForm');
