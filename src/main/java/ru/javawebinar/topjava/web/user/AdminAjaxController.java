@@ -28,17 +28,19 @@ public class AdminAjaxController extends AbstractUserController {
     public void createOrUpdate(@RequestParam("id") int id,
                                @RequestParam("name") String name,
                                @RequestParam("email") String email,
-                               @RequestParam("password") String password,
-                               @RequestParam(value = "enabled", required = false) String enabled) {
+                               @RequestParam("password") String password) {
 
 
         User user = new User(id, name, email, password, Role.ROLE_USER);
-        if (enabled != null)
-            user.setEnabled(Boolean.valueOf(enabled));
         if (id == 0) {
             super.create(user);
         } else {
             super.update(user, id);
         }
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public void updateStatus(@PathVariable("id") int id, @RequestParam("enabled") String enabled) {
+        super.updateStatus(id, Boolean.valueOf(enabled));
     }
 }

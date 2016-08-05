@@ -44,8 +44,17 @@ public abstract class AbstractUserController {
         service.update(user);
     }
 
+    public void updateStatus(int id, boolean status) {
+        User user = get(id);
+        user.setEnabled(status);
+        log.info("update status " + user + " to " + status);
+        update(user, id);
+    }
+
     public User getByMail(String email) {
         log.info("getByEmail " + email);
         return service.getByEmail(email);
     }
+
+
 }

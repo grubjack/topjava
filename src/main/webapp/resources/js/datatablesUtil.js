@@ -19,20 +19,17 @@ function makeEditable() {
     });
 
     $('.checkbox').click(function () {
+        var id = $(this).closest('tr').attr("id");
         $.ajax({
             type: "POST",
-            url: ajaxUrl,
+            url: ajaxUrl + id,
             data: {
-                "id": $(this).closest('tr').attr("id"),
-                "name": $(this).closest('tr').find("td:nth-child(1)").text(),
-                "email": $(this).closest('tr').find("td:nth-child(2)").text(),
-                "password": "default",
                 "enabled": $(this).prop('checked')
             },
             success: function () {
                 $('#editRow').modal('hide');
                 updateTable();
-                successNoty('Saved');
+                successNoty('Status updated');
             }
         });
     });
@@ -41,7 +38,6 @@ function makeEditable() {
         failNoty(event, jqXHR, options, jsExc);
     });
 }
-
 
 function filter() {
     var form = $('#filterForm');

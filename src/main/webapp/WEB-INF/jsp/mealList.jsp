@@ -14,22 +14,22 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="startDate">From Date:</label>
                     <div class="col-sm-2">
-                        <input class="form-control" id="startDate" name="startDate"/>
+                        <input type="date" class="form-control" id="startDate" name="startDate"/>
                     </div>
                     <label class="control-label col-sm-2" for="endDate">To Date:</label>
                     <div class="col-sm-2">
-                        <input class="form-control" id="endDate" name="endDate"/>
+                        <input type="date" class="form-control" id="endDate" name="endDate"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="startTime">From Time:</label>
                     <div class="col-sm-2">
-                        <input class="form-control" id="startTime" name="startTime"/>
+                        <input type="time" class="form-control" id="startTime" name="startTime"/>
                     </div>
 
                     <label class="control-label col-sm-2" for="endTime">To Time:</label>
                     <div class="col-sm-2">
-                        <input class="form-control" id="endTime" name="endTime"/>
+                        <input type="time" class="form-control" id="endTime" name="endTime"/>
                     </div>
                 </div>
                 <button class="btn btn-sm btn-info center-block" type="submit"><fmt:message
