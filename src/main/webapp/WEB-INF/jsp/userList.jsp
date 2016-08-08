@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="webjars/datatables/1.10.12/css/jquery.dataTables.min.css">
@@ -13,12 +12,9 @@
     <div class="container">
         <div class="shadow">
             <h3><fmt:message key="users.title"/></h3>
-
             <div class="view-box">
                 <a class="btn btn-sm btn-info" onclick="add()"><fmt:message key="users.add"/></a>
                 <div class="view-box">
-                    <a class="btn btn-sm btn-info" id="add"><fmt:message key="users.add"/></a>
-
                     <table class="table table-striped display" id="datatable">
                         <thead>
                         <tr>
@@ -39,7 +35,8 @@
                                 <td>${user.roles}</td>
                                 <td>
                                     <input type="checkbox"
-                                           <c:if test="${user.enabled}">checked</c:if>"/>
+                                           <c:if test="${user.enabled}">checked</c:if>
+                                           onclick="enable($(this), ${user.id})"/>
                                 </td>
                                 <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
                                 <td><a class="btn btn-xs btn-primary">Edit</a></td>
@@ -152,6 +149,11 @@
             ]
         });
         makeEditable();
+        $(':checkbox').each(function () {
+            if (!$(this).is(":checked")) {
+                $(this).closest('tr').css("text-decoration", "line-through");
+            }
+        });
     });
 </script>
 </html>
