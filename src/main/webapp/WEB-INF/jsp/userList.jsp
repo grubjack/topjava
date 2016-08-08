@@ -102,58 +102,5 @@
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
-<script type="text/javascript">
-
-    var ajaxUrl = 'ajax/admin/users/';
-    var datatableApi;
-
-    function updateTable() {
-        $.get(ajaxUrl, updateTableByData);
-    }
-
-    // $(document).ready(function () {
-    $(function () {
-        datatableApi = $('#datatable').DataTable({
-            "paging": false,
-            "info": true,
-            "columns": [
-                {
-                    "data": "name"
-                },
-                {
-                    "data": "email"
-                },
-                {
-                    "data": "roles"
-                },
-                {
-                    "data": "enabled"
-                },
-                {
-                    "data": "registered"
-                },
-                {
-                    "defaultContent": "Edit",
-                    "orderable": false
-                },
-                {
-                    "defaultContent": "Delete",
-                    "orderable": false
-                }
-            ],
-            "order": [
-                [
-                    0,
-                    "asc"
-                ]
-            ]
-        });
-        makeEditable();
-        $(':checkbox').each(function () {
-            if (!$(this).is(":checked")) {
-                $(this).closest('tr').css("text-decoration", "line-through");
-            }
-        });
-    });
-</script>
+<script type="text/javascript" src="resources/js/userDatatables.js"></script>
 </html>
