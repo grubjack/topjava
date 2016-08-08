@@ -15,6 +15,7 @@
             <h3><fmt:message key="users.title"/></h3>
 
             <div class="view-box">
+                <a class="btn btn-sm btn-info" onclick="add()"><fmt:message key="users.add"/></a>
                 <div class="view-box">
                     <a class="btn btn-sm btn-info" id="add"><fmt:message key="users.add"/></a>
 
@@ -38,11 +39,11 @@
                                 <td>${user.roles}</td>
                                 <td>
                                     <input type="checkbox"
-                                           <c:if test="${user.enabled}">checked</c:if> id="${user.id}"/>
+                                           <c:if test="${user.enabled}">checked</c:if>"/>
                                 </td>
                                 <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
-                                <td><a class="btn btn-xs btn-primary edit" id="${user.id}">Edit</a></td>
-                                <td><a class="btn btn-xs btn-danger delete" id="${user.id}">Delete</a></td>
+                                <td><a class="btn btn-xs btn-primary">Edit</a></td>
+                                <td><a class="btn btn-xs btn-danger" onclick="deleteRow(${user.id})">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -110,9 +111,7 @@
     var datatableApi;
 
     function updateTable() {
-        $.get(ajaxUrl, function (data) {
-            updateTableByData(data);
-        });
+        $.get(ajaxUrl, updateTableByData);
     }
 
     // $(document).ready(function () {
