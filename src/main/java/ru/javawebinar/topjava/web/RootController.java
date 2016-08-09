@@ -2,16 +2,11 @@ package ru.javawebinar.topjava.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.service.UserMealService;
-import ru.javawebinar.topjava.util.UserMealsUtil;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * User: gkislin
@@ -34,9 +29,7 @@ public class RootController {
     }
 
     @RequestMapping(value = "/meals", method = RequestMethod.GET)
-    public String mealList(Model model) {
-        model.addAttribute("mealList",
-                UserMealsUtil.getWithExceeded(mealService.getAll(AuthorizedUser.id()), AuthorizedUser.getCaloriesPerDay()));
+    public String mealList() {
         return "mealList";
     }
 

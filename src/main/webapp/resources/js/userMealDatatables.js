@@ -13,7 +13,7 @@ $('.time-picker').datetimepicker({
 });
 
 $('.date-time-picker').datetimepicker({
-    format: 'Y-m-d H:i'
+    format: 'Y-m-d H:m:s'
 });
 
 function updateTable() {
