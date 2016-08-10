@@ -18,6 +18,13 @@
                     <input type="password" placeholder="Password" class="form-control" name='password'>
                 </div>
                 <button type="submit" class="btn btn-success"><fmt:message key="app.login"/></button>
+                <div class="form-group">
+                    <a href="login?lang=en">
+                        <img src="resources/images/en.png" alt="English"></a>
+                    <a href="login?lang=ru">
+                        <img src="resources/images/ru.png" alt="Русский">
+                    </a>
+                </div>
             </form:form>
         </div>
     </div>

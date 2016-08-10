@@ -69,9 +69,36 @@
             </property>
         </bean>
     -->
+
+
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:cacheSeconds="60"
           p:defaultEncoding="UTF-8">
         <property name="basenames" value="file:///#{systemEnvironment['TOPJAVA_ROOT']}/config/messages/app"/>
     </bean>
+
+    <!--  i18n -->
+    <bean id="localeChangeInterceptor"
+          class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang"/>
+    </bean>
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en"/>
+    </bean>
+
+    <bean id="handlerMapping"
+          class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <ref bean="localeChangeInterceptor"/>
+        </property>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+    </mvc:interceptors>
+
 </beans>

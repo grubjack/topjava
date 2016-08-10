@@ -10,14 +10,30 @@
 
         <div class="collapse navbar-collapse">
             <form:form class="navbar-form navbar-right" action="logout" method="post">
-                <sec:authorize access="isAuthenticated()">
-                    <sec:authorize access="hasRole('ROLE_ADMIN')">
-                        <a class="btn btn-info" role="button" href="users"><fmt:message key="users.title"/></a>
-                    </sec:authorize>
-                    <a class="btn btn-info" role="button" href="profile">${userTo.name} profile</a>
-                    <input type="submit" class="btn btn-primary" value="<fmt:message key="app.logout"/>">
+            <sec:authorize access="isAuthenticated()">
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <a class="btn btn-info" role="button" href="users"><fmt:message key="users.title"/></a>
                 </sec:authorize>
-            </form:form>
+                <a class="btn btn-info" role="button" href="profile">${userTo.name} profile</a>
+                <input type="submit" class="btn btn-primary" value="<fmt:message key="app.logout"/>">
+            </sec:authorize>
+
+                <%--<div class="btn-group">--%>
+                <%--<a data-toggle="dropdown" class="btn btn-info dropdown-toggle">lang<span class="caret"></span></a>--%>
+                <%--<ul class="dropdown-menu">--%>
+                <%--<li><a href="?lang=en">English</a></li>--%>
+                <%--<li><a href="?lang=ru">Русский</a></li>--%>
+                <%--</ul>--%>
+                <%--</div>--%>
+            <div class="form-group">
+                <a href="?lang=en">
+                    <img src="resources/images/en.png" alt="English"></a>
+                <a href="?lang=ru">
+                    <img src="resources/images/ru.png" alt="Русский">
+                </a>
+            </div>
         </div>
+        </form:form>
     </div>
+</div>
 </div>
