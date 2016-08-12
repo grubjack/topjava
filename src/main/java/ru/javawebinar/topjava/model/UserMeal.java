@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,6 +40,7 @@ public class UserMeal extends BaseEntity {
     @Column(name = "date_time", nullable = false)
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
