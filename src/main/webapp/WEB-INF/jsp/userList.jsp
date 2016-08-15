@@ -15,6 +15,7 @@
             <h3><spring:message code="users.title"/></h3>
             <div class="view-box">
                 <a class="btn btn-sm btn-info" onclick="add()"><spring:message code="users.add"/></a>
+                <p></p>
                 <div class="view-box">
                     <table class="table table-striped display" id="datatable">
                         <thead>

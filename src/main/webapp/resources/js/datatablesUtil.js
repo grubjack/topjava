@@ -20,12 +20,14 @@ function makeEditable() {
 }
 
 function add() {
+    $("h2.modal-title").html(addMeal);
     form.find(":input").val("");
     $('#id').val(null);
     $('#editRow').modal();
 }
 
 function updateRow(id) {
+    $("h2.modal-title").html(editMeal);
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(

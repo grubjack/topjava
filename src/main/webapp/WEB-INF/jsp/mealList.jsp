@@ -51,6 +51,7 @@
                     </div>
                 </form:form>
                 <a class="btn btn-sm btn-info" onclick="add()"><spring:message code="meals.add"/></a>
+                <p></p>
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
@@ -73,7 +74,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title"><spring:message code="meals.edit"/></h2>
+                <h2 class="modal-title"></h2>
+                <script type="text/javascript">
+                    var addMeal = "<spring:message code="meals.add"/>";
+                    var editMeal = "<spring:message code="meals.edit"/>";
+                </script>
             </div>
             <div class="modal-body">
                 <form:form class="form-horizontal" method="post" id="detailsForm">
