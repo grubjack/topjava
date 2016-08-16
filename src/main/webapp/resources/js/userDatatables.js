@@ -13,6 +13,9 @@ $(function () {
         },
         "paging": true,
         "info": true,
+        "language": {
+            "url": $('.locale').text().trim() == 'ru' ? 'resources/language/ru.txt' : ''
+        },
         "columns": [
             {
                 "data": "name"

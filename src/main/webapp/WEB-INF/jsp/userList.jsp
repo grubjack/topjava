@@ -20,11 +20,11 @@
                     <table class="table table-striped display" id="datatable">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th><spring:message code="table.name"/></th>
                             <th>Email</th>
-                            <th>Roles</th>
-                            <th>Active</th>
-                            <th>Registered</th>
+                            <th><spring:message code="table.roles"/></th>
+                            <th><spring:message code="table.active"/></th>
+                            <th><spring:message code="table.registered"/></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -57,14 +57,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h2 class="modal-title"><fmt:message key="users.edit"/></h2>
+                    <h2 id="titleUser" class="modal-title"></h2>
+                    <script type="text/javascript">
+                        var addUser = "<spring:message code="users.add"/>";
+                        var editUser = "<spring:message code="users.edit"/>";
+                        var editButton = "<spring:message code="button.edit"/>";
+                        var deleteButton = "<spring:message code="button.delete"/>";
+                    </script>
                 </div>
                 <div class="modal-body">
                     <form:form class="form-horizontal" method="post" id="detailsForm">
                         <input type="text" hidden="hidden" id="id" name="id">
 
                         <div class="form-group">
-                            <label for="name" class="control-label col-xs-3">Name</label>
+                            <label for="name" class="control-label col-xs-3"><spring:message code="table.name"/></label>
 
                             <div class="col-xs-9">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Name">
@@ -80,7 +86,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="control-label col-xs-3">Password</label>
+                            <label for="password" class="control-label col-xs-3"><spring:message
+                                    code="table.password"/></label>
 
                             <div class="col-xs-9">
                                 <input type="password" class="form-control" id="password" name="password"
@@ -90,7 +97,8 @@
 
                         <div class="form-group">
                             <div class="col-xs-offset-3 col-xs-9">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary"><spring:message
+                                        code="button.save"/></button>
                             </div>
                         </div>
                     </form:form>

@@ -14,21 +14,28 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h2>${register ? 'Register new' : userTo.name.concat(' profile')}</h2>
+            <spring:message code="title.profile" var="profileTitle"/>
+            <spring:message code="title.register" var="registerTitle"/>
+            <h2>${register ? registerTitle : userTo.name.concat(' ').concat(profileTitle)}</h2>
 
             <div class="view-box">
                 <form:form modelAttribute="userTo" class="form-horizontal" method="post"
-                           action="${register ? 'register' : 'profile'}" charset="utf-8"
+                           action="${register ? registerTitle : profileTitle}" charset="utf-8"
                            accept-charset="UTF-8">
-
-                    <custom:inputField label="Name" name="name"/>
+                    <spring:message code="table.name" var="titleName"/>
+                    <custom:inputField label="${titleName}" name="name"/>
                     <custom:inputField label="Email" name="email"/>
-                    <custom:inputField label="Password" name="password" inputType="password"/>
-                    <custom:inputField label="Calories per day" name="caloriesPerDay" inputType="number"/>
+                    <spring:message code="table.password" var="titlePassword"/>
+                    <custom:inputField label="${titlePassword}" name="password" inputType="password"/>
+                    <spring:message code="table.calperday" var="titleCalories"/>
+                    <custom:inputField label="${titleCalories}" name="caloriesPerDay" inputType="number"/>
 
                     <div class="form-group">
                         <div class="col-xs-offset-2 col-xs-10">
-                            <button type="submit" class="btn btn-primary">${register ? 'Add' : 'Update'}</button>
+                            <spring:message code="button.add" var="buttonAdd"/>
+                            <spring:message code="button.update" var="buttonUpdate"/>
+                            <button type="submit"
+                                    class="btn btn-primary">${register ? buttonAdd : buttonUpdate}</button>
                         </div>
                     </div>
                 </form:form>

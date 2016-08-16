@@ -15,7 +15,8 @@
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <a class="btn btn-info" role="button" href="users"><spring:message code="users.title"/></a>
                     </sec:authorize>
-                    <a class="btn btn-info" role="button" href="profile">${userTo.name} profile</a>
+                        <spring:message code="title.profile" var="profileTitle"/>
+                    <a class="btn btn-info" role="button" href="profile">${userTo.name} ${profileTitle}</a>
                     <input type="submit" class="btn btn-primary" value="<spring:message code="app.logout"/>">
                     </sec:authorize>
                     </form:form>

@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
+<div style="display: none" class="locale">
+    ${pageContext.response.locale}
+</div>
 <li>
     <a onclick="show('en')"><img src="resources/images/en.png" alt="English"></a>
 </li>

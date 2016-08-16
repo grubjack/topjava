@@ -19,6 +19,9 @@ $(function () {
         },
         "paging": true,
         "info": true,
+        "language": {
+            "url": $('.locale').text().trim() == 'ru' ? 'resources/language/ru.txt' : ''
+        },
         "columns": [
             {
                 "data": "dateTime",
@@ -62,13 +65,16 @@ $(function () {
                 return false;
             });
 
+
             var startDate = $('#startDate');
             var endDate = $('#endDate');
+
+            var locale = $('.locale').text().trim();
+            jQuery.datetimepicker.setLocale(locale);
 
             startDate.datetimepicker({
                 timepicker: false,
                 format: 'Y-m-d',
-                lang: 'ru',
                 formatDate: 'Y-m-d',
                 onShow: function (ct) {
                     this.setOptions({
@@ -79,7 +85,6 @@ $(function () {
             endDate.datetimepicker({
                 timepicker: false,
                 format: 'Y-m-d',
-                lang: 'ru',
                 formatDate: 'Y-m-d',
                 onShow: function (ct) {
                     this.setOptions({
@@ -91,14 +96,11 @@ $(function () {
             $('.time-picker').datetimepicker({
                 datepicker: false,
                 format: 'H:i',
-                lang: 'ru'
             });
 
             $('#dateTime').datetimepicker({
                 format: 'Y-m-d H:i',
-                lang: 'ru'
             });
-
             makeEditable();
         }
     });

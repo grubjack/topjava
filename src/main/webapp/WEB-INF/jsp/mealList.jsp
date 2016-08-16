@@ -19,26 +19,30 @@
             <div class="view-box">
                 <form:form method="post" class="form-horizontal" role="form" id="filter">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="startDate">From Date:</label>
+                        <label class="control-label col-sm-2" for="startDate"><spring:message
+                                code="title.startDate"/>:</label>
 
                         <div class="col-sm-2">
                             <input class="form-control" name="startDate" id="startDate">
                         </div>
 
-                        <label class="control-label col-sm-2" for="endDate">To Date:</label>
+                        <label class="control-label col-sm-2" for="endDate"><spring:message
+                                code="title.endDate"/>:</label>
 
                         <div class="col-sm-2">
                             <input class="form-control" name="endDate" id="endDate">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="startTime">From Time:</label>
+                        <label class="control-label col-sm-2" for="startTime"><spring:message
+                                code="title.startTime"/>:</label>
 
                         <div class="col-sm-2">
                             <input class="form-control time-picker" name="startTime" id="startTime">
                         </div>
 
-                        <label class="control-label col-sm-2" for="endTime">To Time:</label>
+                        <label class="control-label col-sm-2" for="endTime"><spring:message
+                                code="title.endTime"/>:</label>
 
                         <div class="col-sm-2">
                             <input class="form-control time-picker" name="endTime" id="endTime">
@@ -46,7 +50,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-8">
-                            <button type="submit" class="btn btn-primary pull-right">Filter</button>
+                            <button type="submit" class="btn btn-primary pull-right"><spring:message
+                                    code="button.filter"/></button>
                         </div>
                     </div>
                 </form:form>
@@ -55,9 +60,9 @@
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Calories</th>
+                        <th><spring:message code="table.date"/></th>
+                        <th><spring:message code="table.description"/></th>
+                        <th><spring:message code="table.calories"/></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -74,10 +79,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title"></h2>
+                <h2 id="titleMeal" class="modal-title"></h2>
                 <script type="text/javascript">
                     var addMeal = "<spring:message code="meals.add"/>";
-                    var editMeal = "<spring:message code="meals.edit"/>";
+                    var editMeal = "<spring:message code="meals.edit"/>"
+                    var editButton = "<spring:message code="button.edit"/>";
+                    var deleteButton = "<spring:message code="button.delete"/>";
                 </script>
             </div>
             <div class="modal-body">
@@ -85,14 +92,15 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="dateTime" class="control-label col-xs-3">Date</label>
+                        <label for="dateTime" class="control-label col-xs-3"><spring:message code="table.date"/></label>
 
                         <div class="col-xs-9">
                             <input class="form-control" id="dateTime" name="dateTime" placeholder="Date">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="control-label col-xs-3">Description</label>
+                        <label for="description" class="control-label col-xs-3"><spring:message
+                                code="table.description"/></label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="description" name="description"
@@ -100,7 +108,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="calories" class="control-label col-xs-3">Calories</label>
+                        <label for="calories" class="control-label col-xs-3"><spring:message
+                                code="table.calories"/></label>
 
                         <div class="col-xs-9">
                             <input type="number" class="form-control" id="calories" name="calories"
@@ -109,7 +118,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary"><spring:message code="button.save"/></button>
                         </div>
                     </div>
                 </form:form>

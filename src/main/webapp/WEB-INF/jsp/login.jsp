@@ -17,7 +17,8 @@
                             <input type="text" placeholder="Email" class="form-control" name='username'>
                         </div>
                         <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control" name='password'>
+                            <spring:message code="table.password" var="titlePassword"/>
+                            <input type="password" placeholder="${titlePassword}" class="form-control" name='password'>
                         </div>
                         <button type="submit" class="btn btn-success"><spring:message code="app.login"/></button>
                     </form:form>
