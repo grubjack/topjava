@@ -16,11 +16,10 @@
         <div class="shadow">
             <spring:message code="title.profile" var="profileTitle"/>
             <spring:message code="title.register" var="registerTitle"/>
-            <h2>${register ? registerTitle : userTo.name.concat(' ').concat(profileTitle)}</h2>
 
             <div class="view-box">
                 <form:form modelAttribute="userTo" class="form-horizontal" method="post"
-                           action="${register ? registerTitle : profileTitle}" charset="utf-8"
+                           action="${register ? 'register' : 'profile'}" charset="utf-8"
                            accept-charset="UTF-8">
                     <spring:message code="table.name" var="titleName"/>
                     <custom:inputField label="${titleName}" name="name"/>
