@@ -1,12 +1,14 @@
 package ru.javawebinar.topjava.web;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import ru.javawebinar.topjava.repository.JpaUtil;
 import ru.javawebinar.topjava.service.UserService;
+import ru.javawebinar.topjava.web.user.AbstractUserController;
 
 import javax.annotation.PostConstruct;
 
@@ -50,6 +53,11 @@ abstract public class AbstractControllerTest {
     private JpaUtil jpaUtil;
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        ReflectionTestUtils.setField(AbstractUserController.class, "isTest", true);
+    }
 
     @PostConstruct
     private void postConstruct() {
