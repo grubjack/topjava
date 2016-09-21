@@ -22,7 +22,7 @@ public class DataJpaUserMealRepositoryImpl implements UserMealRepository {
     private ProxyUserRepository userProxy;
 
     @Override
-    @Transactional
+    @Transactional(propagation =)
     public UserMeal save(UserMeal userMeal, int userId) {
         if (!userMeal.isNew() && get(userMeal.getId(), userId) == null) {
             return null;
